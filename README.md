@@ -66,3 +66,29 @@ sam deploy --guided
 4. After deployment, SAM will provide the API endpoint.
 
 > Make sure your Lambda handler is still `lambda_main.handler` and your dependencies are installed in the deployment package.
+
+## GitHub Actions auto-deploy
+
+A GitHub Actions workflow is included at `.github/workflows/aws-sam-deploy.yml`.
+It deploys automatically when you push to `main` or `master`.
+
+### Configure repository secrets
+
+In your GitHub repo settings, add:
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION` (for example `ap-northeast-1`)
+
+### Workflow behavior
+
+On push to `main` or `master`, the workflow:
+
+1. checks out the repo
+2. configures AWS credentials
+3. installs Python and AWS SAM CLI
+4. installs dependencies
+5. runs `sam build`
+6. runs `sam deploy --resolve-s3 --no-confirm-changeset`
+
+If you want, you can also change the workflow to use a specific S3 bucket or a different stack name.
