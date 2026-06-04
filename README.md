@@ -92,3 +92,25 @@ On push to `main` or `master`, the workflow:
 6. runs `sam deploy --resolve-s3 --no-confirm-changeset`
 
 If you want, you can also change the workflow to use a specific S3 bucket or a different stack name.
+
+## Simple MLflow sample
+
+This project includes `mlflow_sample.py`, a minimal example that:
+
+- trains a `LinearRegression` model on the sklearn diabetes dataset
+- logs parameters, metrics, and the model to a local MLflow tracking folder
+
+### Run the sample
+
+```powershell
+pip install -r requirements.txt
+python mlflow_sample.py
+```
+
+### View the MLflow UI
+
+```powershell
+mlflow ui --backend-store-uri sqlite:///mlflow.db
+```
+
+Then open `http://127.0.0.1:5000` in your browser to inspect the run.
