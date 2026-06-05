@@ -24,7 +24,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.13'
 
       - name: Install dependencies
         run: |
@@ -36,4 +36,4 @@ jobs:
         run: sam build
 
       - name: Deploy to AWS
-        run: sam deploy --stack-name fastapi-lambda --region ${{ secrets.AWS_REGION }} --capabilities CAPABILITY_IAM --resolve-s3 --no-confirm-changeset
+        run: sam deploy

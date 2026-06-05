@@ -3,20 +3,25 @@ Transform: AWS::Serverless-2016-10-31
 Description: FastAPI app deployed to AWS Lambda with Mangum.
 Globals:
   Function:
-    Timeout: 10
+    Timeout: 60
     MemorySize: 512
 Resources:
   FastApiFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda_main.handler
-      Runtime: python3.11
+      Runtime: python3.13
       CodeUri: .
       Architectures:
         - x86_64
       Policies:
         - AWSLambdaBasicExecutionRole
       Events:
+        ApiRoot:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
         Api:
           Type: Api
           Properties:
