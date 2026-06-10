@@ -28,8 +28,8 @@ async def read_item(item_id: int, q: str | None = None):
 
 
 @router.get("/recommend/{anime_name}")
-async def recommend(anime_name: str, n: int = Query(default=10, ge=1, le=50)):
-    results = get_recommendations(anime_name, artifacts, n)
+async def recommend(anime_name: str, n: int = Query(default=10, ge=1, le=50), model: str = Query(default="knn", pattern="^(knn|svd)$")):
+    results = get_recommendations(anime_name, artifacts, n, model)
     if not results:
         raise HTTPException(status_code=404, detail=f"Anime '{anime_name}' not found in dataset.")
     return {"anime": anime_name, "recommendations": results}

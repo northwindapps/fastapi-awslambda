@@ -2,6 +2,7 @@ fastapi
 uvicorn[standard]
 mangum
 scikit-learn
+scikit-surprise
 scipy
 numpy
 joblib
