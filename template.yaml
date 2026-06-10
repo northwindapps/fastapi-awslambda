@@ -16,6 +16,16 @@ Resources:
         - x86_64
       Policies:
         - AWSLambdaBasicExecutionRole
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+              Resource: arn:aws:s3:::ml-data-bucket-tutorial-2026/*
+      Environment:
+        Variables:
+          MODEL_BUCKET: ml-data-bucket-tutorial-2026
+          MODEL_PREFIX: ""
       Events:
         ApiRoot:
           Type: Api
