@@ -23,9 +23,21 @@ def _resolve(relative_path: str) -> str:
         return relative_path
     import boto3
     local = f"/tmp/{relative_path.replace('/', '_')}"
-    if not os.path.exists(local):
-        boto3.client("s3").download_file(S3_BUCKET, f"{S3_PREFIX}/{relative_path}", local)
-    return local
+    if os.path.exists(local):
+        return local
+
+    s3_key = f"{S3_PREFIX}/{relative_path}" if S3_PREFIX else relative_path
+    s3 = boto3.client("s3")
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            s3.download_file(S3_BUCKET, s3_key, local)
+            return local
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise RuntimeError(f"Failed to download s3://{S3_BUCKET}/{s3_key} after {max_retries} attempts: {e}")
+            import time
+            time.sleep(2 ** attempt)  # exponential backoff
 
 
 def load_model():

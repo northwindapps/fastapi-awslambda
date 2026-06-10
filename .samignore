@@ -1,0 +1,6 @@
+knnModel/
+svdModel/
+.git/
+.github/
+*.md
+tests/
