@@ -1,3 +1,13 @@
 example calls:
 https://u8qosvaqnc.execute-api.ap-northeast-1.amazonaws.com/Prod/api/v1/recommend/Death%20Note
 https://u8qosvaqnc.execute-api.ap-northeast-1.amazonaws.com/Prod/api/v1/recommend/Naruto
+
+
+
+Essential files for this MLOps:
+
+lambda_main.py — Lambda entry point (handler), defines routes
+recommender.py — recommendation logic (KNN + SVD)
+requirements.txt — Python dependencies
+template.yaml — SAM template (defines Lambda, API Gateway, IAM, S3 config)
+.github/workflows/aws-sam-deploy.yml — GitHub Actions CI/CD workflow
