@@ -1,3 +1,24 @@
+## Data Source
+
+**Kaggle Dataset:** Anime Recommendations Database
+https://www.kaggle.com/datasets/CooperUnion/anime-recommendations-database
+
+### CSV Files Used
+
+1. **anime.csv**
+   - Contains anime metadata
+   - Columns used: anime_id, name, genre, type, episodes, rating, members
+   - Used in: anime_recommendation.ipynb (line 29)
+
+2. **rating.csv**
+   - Contains user ratings for anime
+   - Columns used: user_id, anime_id, rating
+   - Used in: anime_recommendation.ipynb (line 32)
+
+These files are merged on anime_id to create the training dataset for both KNN and SVD models.
+
+---
+
 example calls:
 https://u8qosvaqnc.execute-api.ap-northeast-1.amazonaws.com/Prod/api/v1/recommend/Death%20Note
 https://u8qosvaqnc.execute-api.ap-northeast-1.amazonaws.com/Prod/api/v1/recommend/Naruto
